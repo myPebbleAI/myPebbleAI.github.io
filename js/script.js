@@ -1074,55 +1074,22 @@
 
 
 
-	const serviceImgItem = document.querySelectorAll(".service-block_one-inner");
 
-	function followImageCursor(event, serviceImgItem) {
-		const contentBox = serviceImgItem.getBoundingClientRect();
-		const dx = event.clientX - contentBox.x;
-		const dy = event.clientY - contentBox.y;
-		serviceImgItem.children[4].style.transform = `translate(${dx}px, ${dy}px)`;
+
+	const portfolio_listss = gsap.utils.toArray(".project-detail_image img")
+	if (portfolio_listss) {
+		portfolio_listss.forEach((item, i) => {
+			gsap.from(item, {
+				scrollTrigger: {
+					trigger: item,
+					start: "top center",
+					scrub: 1.2,
+				},
+				scale: 2.0,
+				duration: 1,
+			})
+		})
 	}
-	serviceImgItem.forEach((item, i) => {
-		item.addEventListener("mousemove", (event) => {
-			setInterval(followImageCursor(event, item), 1000);
-		});
-	});
-
-
-
-
-	const serviceImgItemTwo = document.querySelectorAll(".service-block_four-inner");
-
-	function followImageCursorTwo(event, serviceImgItemTwo) {
-		const contentBox = serviceImgItemTwo.getBoundingClientRect();
-		const dx = event.clientX - contentBox.x;
-		const dy = event.clientY - contentBox.y;
-		serviceImgItemTwo.children[2].style.transform = `translate(${dx}px, ${dy}px)`;
-	}
-	serviceImgItemTwo.forEach((item, i) => {
-		item.addEventListener("mousemove", (event) => {
-			setInterval(followImageCursorTwo(event, item), 1000);
-		});
-	});
-
-
-
-
-	const partnersImgItem = document.querySelectorAll(".partners-one li");
-
-	function followPartnersCursor(event, partnersImgItem) {
-		const contentBox = partnersImgItem.getBoundingClientRect();
-		const dx = event.clientX - contentBox.x;
-		const dy = event.clientY - contentBox.y;
-		//partnersImgItem.children[0].style.mix-blend-mode = 'difference';
-		partnersImgItem.children[1].style.transform = `translate(${dx}px, ${dy}px)`;
-	}
-	partnersImgItem.forEach((item, i) => {
-		item.addEventListener("mousemove", (event) => {
-			setInterval(followPartnersCursor(event, item), 1000);
-		});
-	});
-
 
 
 
@@ -1180,7 +1147,41 @@
 
 
 
-	
+	// Style 4 Zoom out
+	let splitTitleLines = gsap.utils.toArray(".title-anim");
+	splitTitleLines.forEach(splitTextLine => {
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: splitTextLine,
+				start: 'top 90%',
+				end: 'bottom 60%',
+				scrub: false,
+				markers: false,
+				toggleActions: 'play none none none'
+			}
+		});
+		const itemSplitted = new SplitText(splitTextLine, {
+			type: "words, lines"
+		});
+		gsap.set(splitTextLine, {
+			perspective: 400
+		});
+		itemSplitted.split({
+			type: "lines"
+		})
+		tl.from(itemSplitted.lines, {
+			duration: 1,
+			delay: 0.3,
+			opacity: 0,
+			rotationX: -80,
+			force3D: true,
+			transformOrigin: "top center -50",
+			stagger: 0.1
+		});
+	});
+
+
+
 
 	// Add Current Class Auto
 	function dynamicCurrentMenuClass(selector) {
