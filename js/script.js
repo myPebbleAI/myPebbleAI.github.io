@@ -1126,33 +1126,6 @@
 
 
 
-	const portfolio_listss = gsap.utils.toArray(".project-detail_image img")
-	if (portfolio_listss) {
-		portfolio_listss.forEach((item, i) => {
-			gsap.from(item, {
-				scrollTrigger: {
-					trigger: item,
-					start: "top center",
-					scrub: 1.2,
-				},
-				scale: 2.0,
-				duration: 1,
-			})
-		})
-	}
-
-const target = document.querySelector("#myElement"); //select the correct target, change the selector if needed.
-if (target) { //check if the element exists before animating it.
-  gsap.to(target, { 
-    // ... your other gsap config options
-    onRepeat: () => {
-        console.log("animation repeated");
-    },
-  });
-} else {
-    console.error("element with selector #myElement not found in the DOM");
-}
-
 
 	//  Animation Fade Left End
 	/////////////////////////////////////////////////////
@@ -1207,41 +1180,7 @@ if (target) { //check if the element exists before animating it.
 
 
 
-	// Style 4 Zoom out
-	let splitTitleLines = gsap.utils.toArray(".title-anim");
-	splitTitleLines.forEach(splitTextLine => {
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: splitTextLine,
-				start: 'top 90%',
-				end: 'bottom 60%',
-				scrub: false,
-				markers: false,
-				toggleActions: 'play none none none'
-			}
-		});
-		const itemSplitted = new SplitText(splitTextLine, {
-			type: "words, lines"
-		});
-		gsap.set(splitTextLine, {
-			perspective: 400
-		});
-		itemSplitted.split({
-			type: "lines"
-		})
-		tl.from(itemSplitted.lines, {
-			duration: 1,
-			delay: 0.3,
-			opacity: 0,
-			rotationX: -80,
-			force3D: true,
-			transformOrigin: "top center -50",
-			stagger: 0.1
-		});
-	});
-
-
-
+	
 
 	// Add Current Class Auto
 	function dynamicCurrentMenuClass(selector) {
