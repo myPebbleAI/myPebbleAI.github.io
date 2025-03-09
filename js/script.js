@@ -1126,8 +1126,32 @@
 
 
 
-	
+	const portfolio_listss = gsap.utils.toArray(".project-detail_image img")
+	if (portfolio_listss) {
+		portfolio_listss.forEach((item, i) => {
+			gsap.from(item, {
+				scrollTrigger: {
+					trigger: item,
+					start: "top center",
+					scrub: 1.2,
+				},
+				scale: 2.0,
+				duration: 1,
+			})
+		})
+	}
 
+const target = document.querySelector("#myElement"); //select the correct target, change the selector if needed.
+if (target) { //check if the element exists before animating it.
+  gsap.to(target, { 
+    // ... your other gsap config options
+    onRepeat: () => {
+        console.log("animation repeated");
+    },
+  });
+} else {
+    console.error("element with selector #myElement not found in the DOM");
+}
 
 
 	//  Animation Fade Left End
