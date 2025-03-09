@@ -1074,6 +1074,56 @@
 
 
 
+	const serviceImgItem = document.querySelectorAll(".service-block_one-inner");
+
+	function followImageCursor(event, serviceImgItem) {
+		const contentBox = serviceImgItem.getBoundingClientRect();
+		const dx = event.clientX - contentBox.x;
+		const dy = event.clientY - contentBox.y;
+		serviceImgItem.children[4].style.transform = `translate(${dx}px, ${dy}px)`;
+	}
+	serviceImgItem.forEach((item, i) => {
+		item.addEventListener("mousemove", (event) => {
+			setInterval(followImageCursor(event, item), 1000);
+		});
+	});
+
+
+
+
+	const serviceImgItemTwo = document.querySelectorAll(".service-block_four-inner");
+
+	function followImageCursorTwo(event, serviceImgItemTwo) {
+		const contentBox = serviceImgItemTwo.getBoundingClientRect();
+		const dx = event.clientX - contentBox.x;
+		const dy = event.clientY - contentBox.y;
+		serviceImgItemTwo.children[2].style.transform = `translate(${dx}px, ${dy}px)`;
+	}
+	serviceImgItemTwo.forEach((item, i) => {
+		item.addEventListener("mousemove", (event) => {
+			setInterval(followImageCursorTwo(event, item), 1000);
+		});
+	});
+
+
+
+
+	const partnersImgItem = document.querySelectorAll(".partners-one li");
+
+	function followPartnersCursor(event, partnersImgItem) {
+		const contentBox = partnersImgItem.getBoundingClientRect();
+		const dx = event.clientX - contentBox.x;
+		const dy = event.clientY - contentBox.y;
+		//partnersImgItem.children[0].style.mix-blend-mode = 'difference';
+		partnersImgItem.children[1].style.transform = `translate(${dx}px, ${dy}px)`;
+	}
+	partnersImgItem.forEach((item, i) => {
+		item.addEventListener("mousemove", (event) => {
+			setInterval(followPartnersCursor(event, item), 1000);
+		});
+	});
+
+
 
 
 	const portfolio_listss = gsap.utils.toArray(".project-detail_image img")
@@ -1106,7 +1156,12 @@
 	var mouseX = 0,
 		mouseY = 0;
 
-	
+	TweenMax.to({}, 0.016, {
+		repeat: -1,
+		onRepeat: function () {
+			posX += (mouseX - posX) / 9;
+			posY += (mouseY - posY) / 9;
+
 			TweenMax.set(follower, {
 				css: {
 					left: posX - 12,
