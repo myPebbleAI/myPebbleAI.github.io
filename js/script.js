@@ -1126,23 +1126,95 @@
 
 
 
-	const portfolio_listss = gsap.utils.toArray(".project-detail_image img")
-	if (portfolio_listss) {
-		portfolio_listss.forEach((item, i) => {
-			gsap.from(item, {
-				scrollTrigger: {
-					trigger: item,
-					start: "top center",
-					scrub: 1.2,
-				},
-				scale: 2.0,
-				duration: 1,
-			})
+	
+
+
+
+	//  Animation Fade Left End
+	/////////////////////////////////////////////////////
+	// CURSOR
+	var cursor = $(".cursor"),
+		follower = $(".cursor-follower");
+
+	var posX = 0,
+		posY = 0;
+
+	var mouseX = 0,
+		mouseY = 0;
+
+	TweenMax.to({}, 0.016, {
+		repeat: -1,
+		onRepeat: function () {
+			posX += (mouseX - posX) / 9;
+			posY += (mouseY - posY) / 9;
+
+			TweenMax.set(follower, {
+				css: {
+					left: posX - 12,
+					top: posY - 12
+				}
+			});
+
+			TweenMax.set(cursor, {
+				css: {
+					left: mouseX,
+					top: mouseY
+				}
+			});
+		}
+	});
+
+	$(document).on("mousemove", function (e) {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	});
+	//circle
+	$(".theme-btn, a").on("mouseenter", function () {
+		cursor.addClass("active");
+		follower.addClass("active");
+	});
+	$(".theme-btn, a").on("mouseleave", function () {
+		cursor.removeClass("active");
+		follower.removeClass("active");
+	});
+	// CURSOR End
+
+
+
+
+
+	// Style 4 Zoom out
+	let splitTitleLines = gsap.utils.toArray(".title-anim");
+	splitTitleLines.forEach(splitTextLine => {
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: splitTextLine,
+				start: 'top 90%',
+				end: 'bottom 60%',
+				scrub: false,
+				markers: false,
+				toggleActions: 'play none none none'
+			}
+		});
+		const itemSplitted = new SplitText(splitTextLine, {
+			type: "words, lines"
+		});
+		gsap.set(splitTextLine, {
+			perspective: 400
+		});
+		itemSplitted.split({
+			type: "lines"
 		})
-	}
-
-
-
+		tl.from(itemSplitted.lines, {
+			duration: 1,
+			delay: 0.3,
+			opacity: 0,
+			rotationX: -80,
+			force3D: true,
+			transformOrigin: "top center -50",
+			stagger: 0.1
+		});
+	});
 
 
 
