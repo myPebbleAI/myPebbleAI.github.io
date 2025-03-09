@@ -608,16 +608,17 @@
 	font-size: 16px;
 	font-weight: 500;
 	color: var(--thm-gray);
-	border: 1px solid transparent;
-	border-radius: 8px;
+	border: 1px solid #9370da;
+	border-radius: 100px;
 	padding: 6px 25px;
 	-webkit-transition: all 500ms ease;
 	transition: all 500ms ease;
 }
 
 .main-header__login-sing-up li a:hover {
-	color: var(--thm-base);
+	color: white;
 	border: 1px solid var(--thm-base);
+	background: #9370da;
 }
 
 
@@ -1355,7 +1356,7 @@
 	width: 0%;
 	height: 100%;
 	z-index: 1;
-	background: rgba(0, 0, 0, 0.90);
+	background: rgb(147, 112, 218);
 	-webkit-transform: translateX(101%);
 	-ms-transform: translateX(101%);
 	transform: translateX(101%);

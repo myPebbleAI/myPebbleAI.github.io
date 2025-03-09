@@ -213,7 +213,7 @@
 }
 
 .site-footer__social a:hover {
-	color: var(--thm-gradient-color2);
+	color: #9370da;
 }
 
 .site-footer__social a+a {
